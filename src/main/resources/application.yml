@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: user-worker
+  jackson:
+    serialization.FAIL_ON_EMPTY_BEANS: false
+  kafka:
+    retry:
+      interval: 1000
+      max-attempts: 1
+    properties:
+      bootstrap-servers: localhost:9092
+      request.timeout.ms: 20000
+      retry.backoff.ms: 500
+    topics:
+      api-user-rq:
+        name: api_user_rq
+        group-id: api_user_rq_group_id
+      api-user-rs:
+        name: api_user_rs
+
+client:
+  http:
+    connect-timeout: 30000
+    read-timeout: 30000
+  wso:
+    user: user
+    password: pass
+    url:
+      base-url: https://localhost
+      user-details: /user-details
+
+logging:
+  level:
+    root: INFO
